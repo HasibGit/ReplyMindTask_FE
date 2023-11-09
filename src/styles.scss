@@ -1,4 +1,167 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./app/color-variables.scss";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.w-100-p {
+  width: 100% !important;
+}
+
+.container {
+  height: calc(100% - 56px);
+  width: 100%;
+}
+
+.font-size-10 {
+  font-size: 10px;
+}
+.font-size-12 {
+  font-size: 12px;
+}
+.font-size-14 {
+  font-size: 14px;
+}
+.font-size-16 {
+  font-size: 16px;
+}
+.font-size-18 {
+  font-size: 18px;
+}
+.font-size-20 {
+  font-size: 20px;
+}
+.font-size-22 {
+  font-size: 2px;
+}
+.font-size-24 {
+  font-size: 24px;
+}
+.font-size-30 {
+  font-size: 30px;
+}
+
+.font-weight-400 {
+  font-weight: 400;
+}
+.font-weight-500 {
+  font-weight: 500;
+}
+.font-weight-600 {
+  font-weight: 600;
+}
+.font-weight-700 {
+  font-weight: 700;
+}
+
+.mt-5 {
+  margin-top: 5px !important;
+}
+.mt-10 {
+  margin-top: 10px !important;
+}
+.mt-12 {
+  margin-top: 12px !important;
+}
+.mt-16 {
+  margin-top: 16px !important;
+}
+.mt-20 {
+  margin-top: 20px !important;
+}
+.mt-24 {
+  margin-top: 24px !important;
+}
+.mt-40 {
+  margin-top: 40px !important;
+}
+.mt-60 {
+  margin-top: 60px !important;
+}
+.mt-80 {
+  margin-top: 80px !important;
+}
+
+.mb-5 {
+  margin-bottom: 5px !important;
+}
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+.mb-12 {
+  margin-bottom: 12px !important;
+}
+.mb-16 {
+  margin-bottom: 16px !important;
+}
+.mb-20 {
+  margin-bottom: 20px !important;
+}
+.mb-24 {
+  margin-bottom: 24px !important;
+}
+.mb-40 {
+  margin-bottom: 40px !important;
+}
+
+.ml-5 {
+  margin-left: 5px !important;
+}
+.ml-10 {
+  margin-left: 10px !important;
+}
+.ml-12 {
+  margin-left: 12px !important;
+}
+
+.ml-20 {
+  margin-left: 20px !important;
+}
+
+.mr-5 {
+  margin-right: 5px !important;
+}
+.mr-10 {
+  margin-right: 10px !important;
+}
+.mr-12 {
+  margin-right: 12px !important;
+}
+
+.mr-20 {
+  margin-right: 20px !important;
+}
+
+.p-24 {
+  padding: 24px !important;
+}
+
+.p-30 {
+  padding: 30px !important;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.color-primary {
+  color: $primary-color;
+}
+
+.color-accent {
+  color: $accent-color;
+}
+
+.color-warn {
+  color: $warn-color;
+}

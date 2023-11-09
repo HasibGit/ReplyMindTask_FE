@@ -1,1 +1,24 @@
-<p>toolbar works!</p>
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <div>
+    <a class="app-title" routerLink="/">
+      <span fxLayout="row" fxLayoutAlign="space-between center"
+        >ReplyMind <mat-icon class="ml-5">donut_large</mat-icon></span
+      >
+    </a>
+  </div>
+
+  <ul
+    class="toolbar-navigation-links"
+    fxLayout
+    fxLayoutAlign="end center"
+    fxLayoutGap="5px"
+    fxHide.xs
+  >
+    <li><a routerLink="login" mat-button color="primary">Login</a></li>
+    <li>
+      <a routerLink="create-or-update" mat-button color="primary"
+        >Create Account</a
+      >
+    </li>
+  </ul>
+</mat-toolbar>
