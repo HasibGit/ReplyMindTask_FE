@@ -8,7 +8,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { LoginComponent } from './login/login.component';
 import { CreateOrUpdateProfileComponent } from './create-or-update-profile/create-or-update-profile.component';
 import { SharedModule } from './shared/shared.module';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ToolbarComponent } from './navigations/toolbar/toolbar.component';
+import { SidenavListComponent } from './navigations/sidenav-list/sidenav-list.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     LoginComponent,
     CreateOrUpdateProfileComponent,
     ToolbarComponent,
+    SidenavListComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,14 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
-  <div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <button
+      fxHide.gt-xs
+      mat-icon-button
+      class="example-icon"
+      aria-label="Toggle sidenav button"
+      (click)="onToggleSidenav()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
     <a class="app-title" routerLink="/">
       <span fxLayout="row" fxLayoutAlign="space-between center"
         >ReplyMind <mat-icon class="ml-5">donut_large</mat-icon></span

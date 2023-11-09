@@ -1,5 +1,13 @@
-<app-toolbar></app-toolbar>
-
-<main>
-  <router-outlet></router-outlet>
-</main>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <app-sidenav-list
+      (sidenavLinkClicked)="sidenav.toggle()"
+    ></app-sidenav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-toolbar (toggleSideNav)="sidenav.toggle()"></app-toolbar>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

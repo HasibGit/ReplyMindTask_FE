@@ -1,0 +1,10 @@
+@import "./color-variables.scss";
+
+mat-sidenav-container,
+mat-sidenav-content {
+  height: 100% !important;
+}
+
+mat-sidenav {
+  width: 250px !important;
+}
