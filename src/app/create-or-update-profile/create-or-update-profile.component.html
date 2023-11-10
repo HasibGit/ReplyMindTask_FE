@@ -1,5 +1,5 @@
 <section class="container px-16" fxLayout="row" fxLayoutAlign="center start">
-  <mat-stepper class="mt-80" [linear]="true" #stepper>
+  <mat-stepper orientation="vertical" class="mt-80" [linear]="false" #stepper>
     <mat-step [stepControl]="personalInformationForm">
       <form
         [formGroup]="personalInformationForm"
@@ -7,6 +7,26 @@
         fxLayoutAlign="center center"
         fxLayoutGap="16px"
       >
+        <ng-template matStepLabel>
+          <div
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+            fxLayoutGap="10px"
+          >
+            Personal Information
+            <i
+              style="font-size: 20px"
+              class="material-icons subform-invalid-icon"
+              *ngIf="
+                personalInformationForm.status === 'INVALID' &&
+                personalInformationForm.touched &&
+                !personalInformationForm.pristine
+              "
+              matTooltip="One or more fields are invalid"
+              >info</i
+            >
+          </div>
+        </ng-template>
         <div
           fxLayout="row"
           fxLayout.lt-md="column"
@@ -231,6 +251,21 @@
           </mat-form-field>
         </div>
       </form>
+    </mat-step>
+
+    <mat-step [stepControl]="professionalInformationForm">
+      <form
+        [formGroup]="professionalInformationForm"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        fxLayoutGap="16px"
+      >
+        <ng-template matStepLabel>Professtional Information</ng-template>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
     </mat-step>
   </mat-stepper>
 </section>

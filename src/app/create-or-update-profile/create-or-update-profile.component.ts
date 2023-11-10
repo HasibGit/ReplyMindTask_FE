@@ -11,7 +11,6 @@ import {
   SALUTATIONS,
   USER_PASSWORD_CRITERIA,
 } from '../shared/constants/app.constants';
-import { TooltipListPipe } from '../shared/pipes/tooltip-list.pipe';
 
 @Component({
   selector: 'app-create-or-update-profile',
