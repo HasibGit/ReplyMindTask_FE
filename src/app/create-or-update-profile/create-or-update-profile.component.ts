@@ -20,6 +20,8 @@ import { TooltipListPipe } from '../shared/pipes/tooltip-list.pipe';
 })
 export class CreateOrUpdateProfileComponent implements OnInit {
   signupForm: FormGroup;
+  personalInformationForm: FormGroup;
+  professionalInformationForm: FormGroup;
   isLoading = false;
   salutationOptions = SALUTATIONS;
   hidePassword = true;
@@ -31,42 +33,53 @@ export class CreateOrUpdateProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.setDobConstraint();
-    this.initSignupForm();
+    this.initForms();
   }
 
-  initSignupForm() {
-    this.signupForm = this.fb.group(
-      {
-        Salutation: ['', Validators.required],
-        FirstName: ['', Validators.required],
-        LastName: ['', Validators.required],
-        Email: ['', [Validators.required, Validators.email]],
-        Password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(20),
-            passwordStrengthValidator(),
+  initForms() {
+    this.signupForm = this.fb.group({
+      personalInformation: this.fb.group(
+        {
+          Salutation: ['', Validators.required],
+          FirstName: ['', Validators.required],
+          LastName: ['', Validators.required],
+          Email: ['', [Validators.required, Validators.email]],
+          Password: [
+            '',
+            [
+              Validators.required,
+              Validators.minLength(6),
+              Validators.maxLength(20),
+              passwordStrengthValidator(),
+            ],
           ],
-        ],
-        ConfirmPassword: ['', Validators.required],
-        DateOfBirth: [
-          '',
-          [Validators.required, dateOfBirthValidator.bind(this)],
-        ],
-        StreetAddress: ['', Validators.required],
-        City: ['', Validators.required],
-        PostalCode: ['', Validators.required],
-        Country: ['', Validators.required],
+          ConfirmPassword: ['', Validators.required],
+          DateOfBirth: [
+            '',
+            [Validators.required, dateOfBirthValidator.bind(this)],
+          ],
+          StreetAddress: ['', Validators.required],
+          City: ['', Validators.required],
+          PostalCode: ['', Validators.required],
+          Country: ['', Validators.required],
+        },
+        { validator: passwordMatchValidator('Password', 'ConfirmPassword') }
+      ),
+
+      professionalInformation: this.fb.group({
         WorkExperienceInYears: ['', Validators.required],
         WorkExperiences: [[], [Validators.required, atLeastOneValidator]],
         AreasOfInterest: [[], [Validators.required, atLeastOneValidator]],
         Bio: ['', [Validators.required, maxWordsValidator(50)]],
-        TermsAgreed: [false, Validators.requiredTrue],
-      },
-      { validator: passwordMatchValidator('Password', 'ConfirmPassword') }
-    );
+      }),
+    });
+
+    this.personalInformationForm = this.signupForm.get(
+      'personalInformation'
+    ) as FormGroup;
+    this.professionalInformationForm = this.signupForm.get(
+      'professionalInformation'
+    ) as FormGroup;
   }
 
   setDobConstraint() {

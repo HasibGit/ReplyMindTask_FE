@@ -14,8 +14,9 @@ body {
 }
 
 .container {
-  height: calc(100% - 56px);
+  height: calc(100vh - 69.99px);
   width: 100%;
+  background-color: $color-white !important;
 }
 
 .font-size-10 {

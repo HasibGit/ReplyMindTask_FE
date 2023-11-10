@@ -1,180 +1,236 @@
 <section class="container px-16" fxLayout="row" fxLayoutAlign="center start">
-  <form
-    [formGroup]="signupForm"
-    fxLayout="column"
-    fxLayoutAlign="center center"
-    fxLayoutGap="16px"
-    class="mt-80"
-  >
-    <!-- Salutation, First Name and Last Name  -->
-    <div
-      fxLayout="row"
-      fxLayout.lt-md="column"
-      fxLayoutAlign="space-between start"
-      fxLayout.lt-md="center start"
-      fxLayoutGap.gt-sm="10px"
-    >
-      <mat-form-field fxFlex="20" fxFlex.lt-md="100">
-        <mat-label>Salutation</mat-label>
-        <mat-select formControlName="Salutation">
-          <mat-option
-            *ngFor="let salutation of salutationOptions"
-            [value]="salutation"
+  <mat-stepper class="mt-80" [linear]="true" #stepper>
+    <mat-step [stepControl]="personalInformationForm">
+      <form
+        [formGroup]="personalInformationForm"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        fxLayoutGap="16px"
+      >
+        <div
+          fxLayout="row"
+          fxLayout.lt-md="column"
+          fxLayoutAlign="space-between start"
+          fxLayout.lt-md="center start"
+          fxLayoutGap.gt-sm="10px"
+        >
+          <mat-form-field fxFlex="20" fxFlex.lt-md="100">
+            <mat-label>Salutation</mat-label>
+            <mat-select formControlName="Salutation">
+              <mat-option
+                *ngFor="let salutation of salutationOptions"
+                [value]="salutation"
+              >
+                {{ salutation }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="
+                personalInformationForm.controls.Salutation.hasError('required')
+              "
+            >
+              This field is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field fxFlex.lt-md="100">
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput formControlName="FirstName" />
+            <mat-error
+              *ngIf="
+                personalInformationForm.controls.FirstName.hasError('required')
+              "
+              >This field is required</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field fxFlex.lt-md="100">
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput formControlName="LastName" />
+            <mat-error
+              *ngIf="
+                personalInformationForm.controls.LastName.hasError('required')
+              "
+              >This field is required</mat-error
+            >
+          </mat-form-field>
+        </div>
+
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="Email" />
+          <mat-error
+            *ngIf="personalInformationForm.controls.Email.hasError('required')"
+            >This field is required</mat-error
           >
-            {{ salutation }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="signupForm.controls.Salutation.hasError('required')">
-          This field is required
-        </mat-error>
-      </mat-form-field>
+          <mat-error
+            *ngIf="personalInformationForm.controls.Email.hasError('email')"
+            >Invalid email address</mat-error
+          >
+        </mat-form-field>
 
-      <mat-form-field fxFlex.lt-md="100">
-        <mat-label>First Name</mat-label>
-        <input type="text" matInput formControlName="FirstName" />
-        <mat-error *ngIf="signupForm.controls.FirstName.hasError('required')"
-          >This field is required</mat-error
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <input
+              type="{{ hidePassword ? 'password' : 'text' }}"
+              matInput
+              formControlName="Password"
+            />
+            <button
+              mat-icon-button
+              type="button"
+              (click)="togglePasswordVisibility()"
+            >
+              <mat-icon class="password-visibility-toggle-btn">{{
+                hidePassword ? "visibility" : "visibility_off"
+              }}</mat-icon>
+            </button>
+          </div>
+
+          <mat-hint
+            [matTooltip]="passwordCriteria | tooltipList"
+            matTooltipClass="tooltip-list"
+          >
+            <i style="font-size: 20px" class="material-icons">info</i>
+          </mat-hint>
+          <mat-error
+            *ngIf="
+              personalInformationForm.controls.Password.hasError('required')
+            "
+            >This field is required</mat-error
+          >
+          <mat-error
+            *ngIf="
+              personalInformationForm.controls.Password.hasError('minlength')
+            "
+            >Password is too short!</mat-error
+          >
+          <mat-error
+            *ngIf="
+              personalInformationForm.controls.Password.hasError('maxlength')
+            "
+            >Password too long!</mat-error
+          >
+          <mat-error
+            *ngIf="
+              personalInformationForm.controls.Password.hasError(
+                'passwordStrength'
+              )
+            "
+            >Password is too weak!</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Confirm Password</mat-label>
+          <input type="password" matInput formControlName="ConfirmPassword" />
+          <mat-error
+            *ngIf="
+              personalInformationForm.controls.ConfirmPassword.hasError(
+                'required'
+              )
+            "
+            >This field is required</mat-error
+          >
+          <mat-error
+            *ngIf="personalInformationForm.hasError('passwordMismatch')"
+            >Passwords do not match</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Date of Birth</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="DateOfBirth"
+            max="{{ maxDateForDateOrBirth }}"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-hint>Choose your date of birth</mat-hint>
+          <mat-error
+            *ngIf="
+              personalInformationForm.controls.DateOfBirth.hasError('required')
+            "
+          >
+            Date of Birth is required
+          </mat-error>
+          <mat-error
+            *ngIf="
+              personalInformationForm.controls.DateOfBirth.hasError(
+                'futureDate'
+              )
+            "
+          >
+            Date of Birth cannot be in the future
+          </mat-error>
+        </mat-form-field>
+
+        <div
+          class="w-100-p"
+          fxLayout="row"
+          fxLayout.lt-md="column"
+          fxLayoutAlign="space-between start"
+          fxLayout.lt-md="center start"
+          fxLayoutGap.gt-sm="10px"
         >
-      </mat-form-field>
+          <mat-form-field>
+            <mat-label>Street Address</mat-label>
+            <input type="text" matInput formControlName="StreetAddress" />
+            <mat-error
+              *ngIf="
+                personalInformationForm.controls.StreetAddress.hasError(
+                  'required'
+                )
+              "
+              >This field is required</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>City</mat-label>
+            <input type="text" matInput formControlName="City" />
+            <mat-error
+              *ngIf="personalInformationForm.controls.City.hasError('required')"
+              >This field is required</mat-error
+            >
+          </mat-form-field>
+        </div>
 
-      <mat-form-field fxFlex.lt-md="100">
-        <mat-label>Last Name</mat-label>
-        <input type="text" matInput formControlName="LastName" />
-        <mat-error *ngIf="signupForm.controls.LastName.hasError('required')"
-          >This field is required</mat-error
+        <div
+          class="w-100-p"
+          fxLayout="row"
+          fxLayout.lt-md="column"
+          fxLayoutAlign="space-between start"
+          fxLayout.lt-md="center start"
+          fxLayoutGap.gt-sm="10px"
         >
-      </mat-form-field>
-    </div>
-
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input type="email" matInput formControlName="Email" />
-      <mat-error *ngIf="signupForm.controls.Email.hasError('required')"
-        >This field is required</mat-error
-      >
-      <mat-error *ngIf="signupForm.controls.Email.hasError('email')"
-        >Invalid email address</mat-error
-      >
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <div fxLayout="row" fxLayoutAlign="space-between center">
-        <input
-          type="{{ hidePassword ? 'password' : 'text' }}"
-          matInput
-          formControlName="Password"
-        />
-        <button
-          mat-icon-button
-          type="button"
-          (click)="togglePasswordVisibility()"
-        >
-          <mat-icon class="password-visibility-toggle-btn">{{
-            hidePassword ? "visibility" : "visibility_off"
-          }}</mat-icon>
-        </button>
-      </div>
-
-      <mat-hint
-        [matTooltip]="passwordCriteria | tooltipList"
-        matTooltipClass="tooltip-list"
-      >
-        <i style="font-size: 20px" class="material-icons">info</i>
-      </mat-hint>
-      <mat-error *ngIf="signupForm.controls.Password.hasError('required')"
-        >This field is required</mat-error
-      >
-      <mat-error *ngIf="signupForm.controls.Password.hasError('minlength')"
-        >Password is too short!</mat-error
-      >
-      <mat-error *ngIf="signupForm.controls.Password.hasError('maxlength')"
-        >Password too long!</mat-error
-      >
-      <mat-error
-        *ngIf="signupForm.controls.Password.hasError('passwordStrength')"
-        >Password is too weak!</mat-error
-      >
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Confirm Password</mat-label>
-      <input type="password" matInput formControlName="ConfirmPassword" />
-      <mat-error
-        *ngIf="signupForm.controls.ConfirmPassword.hasError('required')"
-        >This field is required</mat-error
-      >
-      <mat-error *ngIf="signupForm.hasError('passwordMismatch')"
-        >Passwords do not match</mat-error
-      >
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Date of Birth</mat-label>
-      <input
-        matInput
-        [matDatepicker]="picker"
-        formControlName="DateOfBirth"
-        max="{{ maxDateForDateOrBirth }}"
-      />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-hint>Choose your date of birth</mat-hint>
-      <mat-error *ngIf="signupForm.controls.DateOfBirth.hasError('required')">
-        Date of Birth is required
-      </mat-error>
-      <mat-error *ngIf="signupForm.controls.DateOfBirth.hasError('futureDate')">
-        Date of Birth cannot be in the future
-      </mat-error>
-    </mat-form-field>
-
-    <div
-      class="w-100-p"
-      fxLayout="row"
-      fxLayout.lt-md="column"
-      fxLayoutAlign="space-between start"
-      fxLayout.lt-md="center start"
-      fxLayoutGap.gt-sm="10px"
-    >
-      <mat-form-field>
-        <mat-label>Street Address</mat-label>
-        <input type="text" matInput formControlName="StreetAddress" />
-        <mat-error
-          *ngIf="signupForm.controls.StreetAddress.hasError('required')"
-          >This field is required</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>City</mat-label>
-        <input type="text" matInput formControlName="City" />
-        <mat-error *ngIf="signupForm.controls.City.hasError('required')"
-          >This field is required</mat-error
-        >
-      </mat-form-field>
-    </div>
-
-    <div
-      class="w-100-p"
-      fxLayout="row"
-      fxLayout.lt-md="column"
-      fxLayoutAlign="space-between start"
-      fxLayout.lt-md="center start"
-      fxLayoutGap.gt-sm="10px"
-    >
-      <mat-form-field>
-        <mat-label>Postal Code</mat-label>
-        <input type="text" matInput formControlName="PostalCode" />
-        <mat-error *ngIf="signupForm.controls.PostalCode.hasError('required')"
-          >This field is required</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Country</mat-label>
-        <input type="text" matInput formControlName="Country" />
-        <mat-error *ngIf="signupForm.controls.Country.hasError('required')"
-          >This field is required</mat-error
-        >
-      </mat-form-field>
-    </div>
-  </form>
+          <mat-form-field>
+            <mat-label>Postal Code</mat-label>
+            <input type="text" matInput formControlName="PostalCode" />
+            <mat-error
+              *ngIf="
+                personalInformationForm.controls.PostalCode.hasError('required')
+              "
+              >This field is required</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Country</mat-label>
+            <input type="text" matInput formControlName="Country" />
+            <mat-error
+              *ngIf="
+                personalInformationForm.controls.Country.hasError('required')
+              "
+              >This field is required</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-step>
+  </mat-stepper>
 </section>
