@@ -1,4 +1,9 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import {
+  AbstractControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
 
 export function atLeastOneValidator(
   control: AbstractControl
@@ -42,5 +47,27 @@ export function passwordStrengthValidator(): ValidatorFn {
     const isValid = hasLowerCase && hasUpperCase && hasNumber && hasSpecialChar;
 
     return isValid ? null : { passwordStrength: true };
+  };
+}
+
+export function passwordMatchValidator(
+  controlName: string,
+  matchingControlName: string
+): ValidatorFn {
+  return (formGroup: FormGroup): { [key: string]: any } | null => {
+    const passwordControl = formGroup.controls[controlName];
+    const confirmPasswordControl = formGroup.controls[matchingControlName];
+
+    if (!passwordControl || !confirmPasswordControl) {
+      return null;
+    }
+
+    if (passwordControl.value !== confirmPasswordControl.value) {
+      confirmPasswordControl.setErrors({ passwordMismatch: true });
+      return { passwordMismatch: true };
+    } else {
+      confirmPasswordControl.setErrors(null);
+      return null;
+    }
   };
 }

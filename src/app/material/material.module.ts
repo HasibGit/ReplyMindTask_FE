@@ -20,6 +20,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -45,6 +46,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatSnackBarModule,
     MatDividerModule,
     MatChipsModule,
+    MatTooltipModule,
   ],
   exports: [
     MatButtonModule,
@@ -67,6 +69,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatSnackBarModule,
     MatDividerModule,
     MatChipsModule,
+    MatTooltipModule,
   ],
   providers: [
     {

@@ -6,6 +6,7 @@
     fxLayoutGap="16px"
     class="mt-80"
   >
+    <!-- Salutation, First Name and Last Name  -->
     <div
       fxLayout="row"
       fxLayout.lt-md="column"
@@ -44,5 +45,68 @@
         >
       </mat-form-field>
     </div>
+
+    <mat-form-field class="w-100-p">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="Email" />
+      <mat-error *ngIf="signupForm.controls.Email.hasError('required')"
+        >This field is required</mat-error
+      >
+      <mat-error *ngIf="signupForm.controls.Email.hasError('email')"
+        >Invalid email address</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="w-100-p">
+      <mat-label>Password</mat-label>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <input
+          type="{{ hidePassword ? 'password' : 'text' }}"
+          matInput
+          formControlName="Password"
+        />
+        <button
+          mat-icon-button
+          type="button"
+          (click)="togglePasswordVisibility()"
+        >
+          <mat-icon class="password-visibility-toggle-btn">{{
+            hidePassword ? "visibility" : "visibility_off"
+          }}</mat-icon>
+        </button>
+      </div>
+
+      <mat-hint
+        [matTooltip]="passwordCriteria | tooltipList"
+        matTooltipClass="tooltip-list"
+      >
+        <i style="font-size: 20px" class="material-icons">info</i>
+      </mat-hint>
+      <mat-error *ngIf="signupForm.controls.Password.hasError('required')"
+        >This field is required</mat-error
+      >
+      <mat-error *ngIf="signupForm.controls.Password.hasError('minlength')"
+        >Password is too short!</mat-error
+      >
+      <mat-error *ngIf="signupForm.controls.Password.hasError('maxlength')"
+        >Password too long!</mat-error
+      >
+      <mat-error
+        *ngIf="signupForm.controls.Password.hasError('passwordStrength')"
+        >Password is too weak!</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="w-100-p">
+      <mat-label>Confirm Password</mat-label>
+      <input type="password" matInput formControlName="ConfirmPassword" />
+      <mat-error
+        *ngIf="signupForm.controls.ConfirmPassword.hasError('required')"
+        >This field is required</mat-error
+      >
+      <mat-error *ngIf="signupForm.hasError('passwordMismatch')"
+        >Passwords do not match</mat-error
+      >
+    </mat-form-field>
   </form>
 </section>

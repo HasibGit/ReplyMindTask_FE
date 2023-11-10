@@ -10,6 +10,7 @@ import { CreateOrUpdateProfileComponent } from './create-or-update-profile/creat
 import { SharedModule } from './shared/shared.module';
 import { ToolbarComponent } from './navigations/toolbar/toolbar.component';
 import { SidenavListComponent } from './navigations/sidenav-list/sidenav-list.component';
+import { TooltipListPipe } from './shared/pipes/tooltip-list.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SidenavListComponent } from './navigations/sidenav-list/sidenav-list.co
     CreateOrUpdateProfileComponent,
     ToolbarComponent,
     SidenavListComponent,
+    TooltipListPipe,
   ],
   imports: [
     BrowserModule,
