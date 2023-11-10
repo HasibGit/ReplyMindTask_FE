@@ -28,4 +28,8 @@ export class MyProfileComponent implements OnInit {
       Bio: 'Passionate software engineer with a focus on building scalable and user-friendly applications.',
     };
   }
+
+  getFullName() {
+    return `${this.user.FirstName} ${this.user.LastName}`;
+  }
 }

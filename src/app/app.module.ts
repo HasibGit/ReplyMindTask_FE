@@ -12,6 +12,7 @@ import { ToolbarComponent } from './navigations/toolbar/toolbar.component';
 import { SidenavListComponent } from './navigations/sidenav-list/sidenav-list.component';
 import { TooltipListPipe } from './shared/pipes/tooltip-list.pipe';
 import { CommaSeparatedPipe } from './shared/pipes/comma-seperated.pipe';
+import { HavatarModule } from 'havatar';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CommaSeparatedPipe } from './shared/pipes/comma-seperated.pipe';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    HavatarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -9,18 +9,15 @@
       class="mb-24"
     >
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-        <img
-          style="height: 80px; width: 80px; border-radius: 50%"
-          src="../../assets/images/kayo.jpg"
-          alt=""
-        />
+        <h-avatar [name]="getFullName()"></h-avatar>
+
         <h2>
           {{ user.Salutation + " " + user.FirstName + " " + user.LastName }}
         </h2>
       </div>
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-        <button mat-button color="primary">Update</button>
-        <button mat-button color="warn">Delete</button>
+        <button mat-raised-button color="primary">Update</button>
+        <button mat-raised-button color="warn">Delete</button>
       </div>
     </div>
 
