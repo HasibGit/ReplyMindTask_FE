@@ -46,7 +46,7 @@
       </mat-form-field>
     </div>
 
-    <mat-form-field class="w-100-p">
+    <mat-form-field>
       <mat-label>Email</mat-label>
       <input type="email" matInput formControlName="Email" />
       <mat-error *ngIf="signupForm.controls.Email.hasError('required')"
@@ -57,7 +57,7 @@
       >
     </mat-form-field>
 
-    <mat-form-field class="w-100-p">
+    <mat-form-field>
       <mat-label>Password</mat-label>
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <input
@@ -97,7 +97,7 @@
       >
     </mat-form-field>
 
-    <mat-form-field class="w-100-p">
+    <mat-form-field>
       <mat-label>Confirm Password</mat-label>
       <input type="password" matInput formControlName="ConfirmPassword" />
       <mat-error
@@ -109,7 +109,7 @@
       >
     </mat-form-field>
 
-    <mat-form-field class="w-100-p">
+    <mat-form-field>
       <mat-label>Date of Birth</mat-label>
       <input
         matInput
@@ -127,5 +127,54 @@
         Date of Birth cannot be in the future
       </mat-error>
     </mat-form-field>
+
+    <div
+      class="w-100-p"
+      fxLayout="row"
+      fxLayout.lt-md="column"
+      fxLayoutAlign="space-between start"
+      fxLayout.lt-md="center start"
+      fxLayoutGap.gt-sm="10px"
+    >
+      <mat-form-field>
+        <mat-label>Street Address</mat-label>
+        <input type="text" matInput formControlName="StreetAddress" />
+        <mat-error
+          *ngIf="signupForm.controls.StreetAddress.hasError('required')"
+          >This field is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>City</mat-label>
+        <input type="text" matInput formControlName="City" />
+        <mat-error *ngIf="signupForm.controls.City.hasError('required')"
+          >This field is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div
+      class="w-100-p"
+      fxLayout="row"
+      fxLayout.lt-md="column"
+      fxLayoutAlign="space-between start"
+      fxLayout.lt-md="center start"
+      fxLayoutGap.gt-sm="10px"
+    >
+      <mat-form-field>
+        <mat-label>Postal Code</mat-label>
+        <input type="text" matInput formControlName="PostalCode" />
+        <mat-error *ngIf="signupForm.controls.PostalCode.hasError('required')"
+          >This field is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Country</mat-label>
+        <input type="text" matInput formControlName="Country" />
+        <mat-error *ngIf="signupForm.controls.Country.hasError('required')"
+          >This field is required</mat-error
+        >
+      </mat-form-field>
+    </div>
   </form>
 </section>
