@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { atLeastOneValidator } from '../shared/validators/app.validators';
+import {
+  atLeastOneValidator,
+  maxWordsValidator,
+  passwordStrengthValidator,
+} from '../shared/validators/app.validators';
 
 @Component({
   selector: 'app-create-or-update-profile',
@@ -29,13 +33,18 @@ export class CreateOrUpdateProfileComponent implements OnInit {
           Validators.required,
           Validators.minLength(6),
           Validators.maxLength(20),
+          passwordStrengthValidator,
         ],
       ],
       DateOfBirth: ['', Validators.required],
+      StreetAddress: ['', Validators.required],
+      City: ['', Validators.required],
+      PostalCode: ['', Validators.required],
+      Country: ['', Validators.required],
       WorkExperienceInYears: ['', Validators.required],
       WorkExperiences: [[], [Validators.required, atLeastOneValidator]],
       AreasOfInterest: [[], [Validators.required, atLeastOneValidator]],
-      Bio: ['', Validators.required],
+      Bio: ['', [Validators.required, maxWordsValidator(50)]],
       TermsAgreed: [false, Validators.requiredTrue],
     });
   }
