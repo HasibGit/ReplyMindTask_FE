@@ -21,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [],
@@ -47,6 +48,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDividerModule,
     MatChipsModule,
     MatTooltipModule,
+    MatStepperModule,
   ],
   exports: [
     MatButtonModule,
@@ -70,6 +72,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDividerModule,
     MatChipsModule,
     MatTooltipModule,
+    MatStepperModule,
   ],
   providers: [
     {
