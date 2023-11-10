@@ -1,0 +1,37 @@
+@import "../color-variables.scss";
+
+.info-container {
+  padding: 16px;
+}
+
+.description-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: $mat-icon-color;
+}
+
+.phone-no-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: $rm-primary-color;
+}
+
+.info-container {
+  padding: 16px;
+}
+
+.details-container-card {
+  background-color: $color-white;
+  border: 1px solid $border-line-color;
+  border-radius: 8px;
+}
+
+.heading {
+  padding: 16px;
+}
+
+.section-header {
+  font-size: 16px;
+  font-weight: 600;
+  color: $text-N900;
+}

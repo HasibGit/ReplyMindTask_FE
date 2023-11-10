@@ -6,6 +6,7 @@
       fxLayoutAlign="space-between center"
       fxLayoutAlign.lt-md="start center"
       fxLayoutGap.lt-md="24px"
+      class="mb-24"
     >
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
         <img
@@ -21,6 +22,69 @@
         <button mat-button color="primary">Update</button>
         <button mat-button color="warn">Delete</button>
       </div>
+    </div>
+
+    <div class="details-container-card">
+      <section class="heading">
+        <h3 class="section-header">{{ "Personal Information" }}</h3>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <section
+        class="info-container"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        fxLayoutGap="12px"
+      >
+        <div
+          class="w-100-p"
+          fxLayout.gt-sm="row"
+          fxLayout="column"
+          fxLayoutAlign.gt-sm="start center"
+        >
+          <p fxFlex.gt-sm="30" fxFlex="100%" class="description-text">
+            {{ "Email" }}
+          </p>
+          <p fxFlex.gt-sm="70" fxFlex="100%" class="phone-no-text">
+            {{ user.Email }}
+          </p>
+        </div>
+        <div
+          class="w-100-p"
+          fxLayout.gt-sm="row"
+          fxLayout="column"
+          fxLayoutAlign.gt-sm="start center"
+        >
+          <p fxFlex.gt-sm="30" fxFlex="100%" class="description-text">
+            {{ "Date of Birth" }}
+          </p>
+          <p fxFlex.gt-sm="70" fxFlex="100%" class="phone-no-text">
+            {{ user.DateOfBirth | date : "mediumDate" }}
+          </p>
+        </div>
+        <div
+          class="w-100-p"
+          fxLayout.gt-sm="row"
+          fxLayout="column"
+          fxLayoutAlign.gt-sm="start center"
+        >
+          <p fxFlex.gt-sm="30" fxFlex="100%" class="description-text">
+            {{ "Address" }}
+          </p>
+          <p fxFlex.gt-sm="70" fxFlex="100%" class="phone-no-text">
+            {{
+              user.StreetAddress +
+                ", " +
+                user.City +
+                "-" +
+                user.PostalCode +
+                ", " +
+                user.Country
+            }}
+          </p>
+        </div>
+      </section>
     </div>
   </div>
 </div>
