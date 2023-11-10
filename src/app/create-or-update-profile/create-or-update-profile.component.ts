@@ -103,6 +103,6 @@ export class CreateOrUpdateProfileComponent implements OnInit {
   }
 
   signup() {
-    console.log(this.signupForm);
+    console.log(this.signupForm.value);
   }
 }
