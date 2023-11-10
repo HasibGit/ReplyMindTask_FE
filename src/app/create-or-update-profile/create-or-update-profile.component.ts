@@ -5,6 +5,7 @@ import {
   maxWordsValidator,
   passwordStrengthValidator,
 } from '../shared/validators/app.validators';
+import { SALUTATIONS } from '../shared/constants/app.constants';
 
 @Component({
   selector: 'app-create-or-update-profile',
@@ -14,6 +15,7 @@ import {
 export class CreateOrUpdateProfileComponent implements OnInit {
   signupForm: FormGroup;
   isLoading = false;
+  salutationOptions = SALUTATIONS;
 
   constructor(private fb: FormBuilder) {}
 

@@ -1,9 +1,48 @@
-<section class="container" fxLayout="row" fxLayoutAlign="center start">
+<section class="container px-16" fxLayout="row" fxLayoutAlign="center start">
   <form
     [formGroup]="signupForm"
     fxLayout="column"
     fxLayoutAlign="center center"
     fxLayoutGap="16px"
     class="mt-80"
-  ></form>
+  >
+    <div
+      fxLayout="row"
+      fxLayout.lt-md="column"
+      fxLayoutAlign="space-between start"
+      fxLayout.lt-md="center start"
+      fxLayoutGap.gt-sm="10px"
+    >
+      <mat-form-field fxFlex="20" fxFlex.lt-md="100">
+        <mat-label>Salutation</mat-label>
+        <mat-select formControlName="Salutation">
+          <mat-option
+            *ngFor="let salutation of salutationOptions"
+            [value]="salutation"
+          >
+            {{ salutation }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="signupForm.controls.Salutation.hasError('required')">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex.lt-md="100">
+        <mat-label>First Name</mat-label>
+        <input type="text" matInput formControlName="FirstName" />
+        <mat-error *ngIf="signupForm.controls.FirstName.hasError('required')"
+          >This field is required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field fxFlex.lt-md="100">
+        <mat-label>Last Name</mat-label>
+        <input type="text" matInput formControlName="LastName" />
+        <mat-error *ngIf="signupForm.controls.LastName.hasError('required')"
+          >This field is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+  </form>
 </section>
