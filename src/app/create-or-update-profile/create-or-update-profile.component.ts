@@ -101,4 +101,8 @@ export class CreateOrUpdateProfileComponent implements OnInit {
     this.areasOfInterestOptions =
       AREAS_OF_INTEREST_RELEVANT_TO_PROFESSION[event.value];
   }
+
+  signup() {
+    console.log(this.signupForm);
+  }
 }

@@ -1,5 +1,5 @@
 <section class="container px-16" fxLayout="row" fxLayoutAlign="center start">
-  <mat-stepper orientation="vertical" class="mt-80" [linear]="false" #stepper>
+  <mat-stepper orientation="vertical" class="mt-80" [linear]="true" #stepper>
     <mat-step [stepControl]="personalInformationForm">
       <form
         [formGroup]="personalInformationForm"
@@ -251,6 +251,9 @@
           </mat-form-field>
         </div>
       </form>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
     </mat-step>
 
     <mat-step [stepControl]="professionalInformationForm">
@@ -361,11 +364,52 @@
             This field is required
           </mat-error>
         </mat-form-field>
+        <mat-form-field>
+          <mat-label>Bio</mat-label>
+          <textarea
+            matInput
+            formControlName="Bio"
+            rows="5"
+            cdkTextareaAutosize
+          ></textarea>
+          <mat-error
+            *ngIf="
+              professionalInformationForm.controls.Bio.hasError('required')
+            "
+          >
+            This field is required
+          </mat-error>
+          <mat-error
+            *ngIf="
+              professionalInformationForm.controls.Bio.hasError(
+                'exceedsMaxWords'
+              )
+            "
+          >
+            Bio cannot exceed 50 words
+          </mat-error>
+        </mat-form-field>
       </form>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
+      <p class="mt-20 mb-24">You are ready to create your account!</p>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-button matStepperPrevious>Back</button>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          (click)="signup()"
+          [disabled]="signupForm.invalid"
+        >
+          Create Account
+        </button>
+      </div>
     </mat-step>
   </mat-stepper>
 </section>
