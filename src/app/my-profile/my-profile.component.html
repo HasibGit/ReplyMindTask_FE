@@ -24,7 +24,9 @@
       </div>
     </div>
 
-    <div class="details-container-card">
+    <p class="bio-text mb-16">{{ user.Bio }}</p>
+
+    <div class="details-container-card mb-16">
       <section class="heading">
         <h3 class="section-header">{{ "Personal Information" }}</h3>
       </section>
@@ -43,10 +45,10 @@
           fxLayout="column"
           fxLayoutAlign.gt-sm="start center"
         >
-          <p fxFlex.gt-sm="30" fxFlex="100%" class="description-text">
+          <p fxFlex.gt-sm="30" fxFlex="100%" class="details-key-text">
             {{ "Email" }}
           </p>
-          <p fxFlex.gt-sm="70" fxFlex="100%" class="phone-no-text">
+          <p fxFlex.gt-sm="70" fxFlex="100%" class="details-value-text">
             {{ user.Email }}
           </p>
         </div>
@@ -56,10 +58,10 @@
           fxLayout="column"
           fxLayoutAlign.gt-sm="start center"
         >
-          <p fxFlex.gt-sm="30" fxFlex="100%" class="description-text">
+          <p fxFlex.gt-sm="30" fxFlex="100%" class="details-key-text">
             {{ "Date of Birth" }}
           </p>
-          <p fxFlex.gt-sm="70" fxFlex="100%" class="phone-no-text">
+          <p fxFlex.gt-sm="70" fxFlex="100%" class="details-value-text">
             {{ user.DateOfBirth | date : "mediumDate" }}
           </p>
         </div>
@@ -69,10 +71,10 @@
           fxLayout="column"
           fxLayoutAlign.gt-sm="start center"
         >
-          <p fxFlex.gt-sm="30" fxFlex="100%" class="description-text">
+          <p fxFlex.gt-sm="30" fxFlex="100%" class="details-key-text">
             {{ "Address" }}
           </p>
-          <p fxFlex.gt-sm="70" fxFlex="100%" class="phone-no-text">
+          <p fxFlex.gt-sm="70" fxFlex="100%" class="details-value-text">
             {{
               user.StreetAddress +
                 ", " +
@@ -82,6 +84,61 @@
                 ", " +
                 user.Country
             }}
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <div class="details-container-card">
+      <section class="heading">
+        <h3 class="section-header">{{ "Professional Information" }}</h3>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <section
+        class="info-container"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        fxLayoutGap="12px"
+      >
+        <div
+          class="w-100-p"
+          fxLayout.gt-sm="row"
+          fxLayout="column"
+          fxLayoutAlign.gt-sm="start center"
+        >
+          <p fxFlex.gt-sm="30" fxFlex="100%" class="details-key-text">
+            {{ "Profession" }}
+          </p>
+          <p fxFlex.gt-sm="70" fxFlex="100%" class="details-value-text">
+            {{ user.Profession }}
+          </p>
+        </div>
+        <div
+          class="w-100-p"
+          fxLayout.gt-sm="row"
+          fxLayout="column"
+          fxLayoutAlign.gt-sm="start center"
+        >
+          <p fxFlex.gt-sm="30" fxFlex="100%" class="details-key-text">
+            {{ "Years of Experience" }}
+          </p>
+          <p fxFlex.gt-sm="70" fxFlex="100%" class="details-value-text">
+            {{ user.WorkExperienceInYears }}
+          </p>
+        </div>
+        <div
+          class="w-100-p"
+          fxLayout.gt-sm="row"
+          fxLayout="column"
+          fxLayoutAlign.gt-sm="start center"
+        >
+          <p fxFlex.gt-sm="30" fxFlex="100%" class="details-key-text">
+            {{ "Ares of Expertise" }}
+          </p>
+          <p fxFlex.gt-sm="70" fxFlex="100%" class="details-value-text">
+            {{ user.AreasOfExpertise | commaSeparated }}
           </p>
         </div>
       </section>

@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { ToolbarComponent } from './navigations/toolbar/toolbar.component';
 import { SidenavListComponent } from './navigations/sidenav-list/sidenav-list.component';
 import { TooltipListPipe } from './shared/pipes/tooltip-list.pipe';
+import { CommaSeparatedPipe } from './shared/pipes/comma-seperated.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { TooltipListPipe } from './shared/pipes/tooltip-list.pipe';
     ToolbarComponent,
     SidenavListComponent,
     TooltipListPipe,
+    CommaSeparatedPipe,
   ],
   imports: [
     BrowserModule,

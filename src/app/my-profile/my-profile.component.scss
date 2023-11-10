@@ -4,13 +4,13 @@
   padding: 16px;
 }
 
-.description-text {
+.description-key-text {
   font-size: 14px;
   font-weight: 400;
   color: $mat-icon-color;
 }
 
-.phone-no-text {
+.details-value-text {
   font-size: 14px;
   font-weight: 400;
   color: $rm-primary-color;
@@ -34,4 +34,8 @@
   font-size: 16px;
   font-weight: 600;
   color: $text-N900;
+}
+
+.bio-text {
+  color: $secondary-text-color;
 }
