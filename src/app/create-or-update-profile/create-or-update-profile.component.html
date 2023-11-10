@@ -293,29 +293,74 @@
             <mat-label>Work Experience</mat-label>
             <mat-select formControlName="WorkExperienceInYears">
               <mat-option
-                *ngFor="let salutation of salutationOptions"
-                [value]="salutation"
+                *ngFor="let option of experienceInYearsOptions"
+                [value]="option"
               >
-                {{ salutation }}
+                {{ option }}
               </mat-option>
             </mat-select>
             <mat-error
               *ngIf="
-                personalInformationForm.controls.Salutation.hasError('required')
+                professionalInformationForm.controls.WorkExperienceInYears.hasError(
+                  'required'
+                )
               "
             >
               This field is required
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <mat-label>City</mat-label>
-            <input type="text" matInput formControlName="City" />
-            <mat-error
-              *ngIf="personalInformationForm.controls.City.hasError('required')"
-              >This field is required</mat-error
+            <mat-label>Profession</mat-label>
+            <mat-select
+              formControlName="Profession"
+              (selectionChange)="onSelectProfession($event)"
             >
+              <mat-option
+                *ngFor="let option of professionOptions"
+                [value]="option"
+              >
+                {{ option }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="
+                professionalInformationForm.controls.Profession.hasError(
+                  'required'
+                )
+              "
+            >
+              This field is required
+            </mat-error>
           </mat-form-field>
         </div>
+        <mat-form-field>
+          <mat-label>Areas Of Expertise</mat-label>
+          <mat-select
+            formControlName="AreasOfExpertise"
+            [disabled]="!professionalInformationForm.controls.Profession.value"
+            multiple
+          >
+            <mat-option
+              *ngFor="let option of areasOfInterestOptions"
+              [value]="option"
+            >
+              {{ option }}
+            </mat-option>
+          </mat-select>
+          <mat-hint
+            >Please select a profession first to see relevant expertise
+            options</mat-hint
+          >
+          <mat-error
+            *ngIf="
+              professionalInformationForm.controls.AreasOfExpertise.hasError(
+                'required'
+              )
+            "
+          >
+            This field is required
+          </mat-error>
+        </mat-form-field>
       </form>
     </mat-step>
     <mat-step>

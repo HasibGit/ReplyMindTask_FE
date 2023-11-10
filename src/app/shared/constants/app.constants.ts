@@ -33,3 +33,9 @@ export const AREAS_OF_INTEREST_RELEVANT_TO_PROFESSION: {
   ],
   'Content Creator': ['Youtube', 'Twitch', 'Twitter', 'Facebook', 'TikTok'],
 };
+
+export const YEARS_OF_EXPERIENCE_OPTIONS = [
+  '1 year',
+  '1 - 5 years',
+  '5 years+',
+];

@@ -8,9 +8,13 @@ import {
   passwordStrengthValidator,
 } from '../shared/validators/app.validators';
 import {
+  AREAS_OF_INTEREST_RELEVANT_TO_PROFESSION,
   SALUTATIONS,
   USER_PASSWORD_CRITERIA,
+  USER_PROFESSIONS,
+  YEARS_OF_EXPERIENCE_OPTIONS,
 } from '../shared/constants/app.constants';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-create-or-update-profile',
@@ -25,6 +29,9 @@ export class CreateOrUpdateProfileComponent implements OnInit {
   salutationOptions = SALUTATIONS;
   hidePassword = true;
   maxDateForDateOrBirth: string;
+  experienceInYearsOptions = YEARS_OF_EXPERIENCE_OPTIONS;
+  professionOptions = USER_PROFESSIONS;
+  areasOfInterestOptions: string[];
 
   passwordCriteria = USER_PASSWORD_CRITERIA;
 
@@ -67,8 +74,8 @@ export class CreateOrUpdateProfileComponent implements OnInit {
 
       professionalInformation: this.fb.group({
         WorkExperienceInYears: ['', Validators.required],
-        WorkExperiences: [[], [Validators.required, atLeastOneValidator]],
-        AreasOfInterest: [[], [Validators.required, atLeastOneValidator]],
+        Profession: ['', Validators.required],
+        AreasOfExpertise: [[], [Validators.required]],
         Bio: ['', [Validators.required, maxWordsValidator(50)]],
       }),
     });
@@ -88,5 +95,10 @@ export class CreateOrUpdateProfileComponent implements OnInit {
 
   togglePasswordVisibility(): void {
     this.hidePassword = !this.hidePassword;
+  }
+
+  onSelectProfession(event: MatSelectChange): void {
+    this.areasOfInterestOptions =
+      AREAS_OF_INTEREST_RELEVANT_TO_PROFESSION[event.value];
   }
 }
