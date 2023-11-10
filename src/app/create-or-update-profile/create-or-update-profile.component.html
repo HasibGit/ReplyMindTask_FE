@@ -260,7 +260,62 @@
         fxLayoutAlign="center center"
         fxLayoutGap="16px"
       >
-        <ng-template matStepLabel>Professtional Information</ng-template>
+        <ng-template matStepLabel>
+          <div
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+            fxLayoutGap="10px"
+          >
+            Professional Information
+            <i
+              style="font-size: 20px"
+              class="material-icons subform-invalid-icon"
+              *ngIf="
+                professionalInformationForm.status === 'INVALID' &&
+                professionalInformationForm.touched &&
+                !professionalInformationForm.pristine
+              "
+              matTooltip="One or more fields are invalid"
+              >info</i
+            >
+          </div>
+        </ng-template>
+
+        <div
+          class="w-100-p"
+          fxLayout="row"
+          fxLayout.lt-md="column"
+          fxLayoutAlign="space-between start"
+          fxLayout.lt-md="center start"
+          fxLayoutGap.gt-sm="10px"
+        >
+          <mat-form-field>
+            <mat-label>Work Experience</mat-label>
+            <mat-select formControlName="WorkExperienceInYears">
+              <mat-option
+                *ngFor="let salutation of salutationOptions"
+                [value]="salutation"
+              >
+                {{ salutation }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="
+                personalInformationForm.controls.Salutation.hasError('required')
+              "
+            >
+              This field is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>City</mat-label>
+            <input type="text" matInput formControlName="City" />
+            <mat-error
+              *ngIf="personalInformationForm.controls.City.hasError('required')"
+              >This field is required</mat-error
+            >
+          </mat-form-field>
+        </div>
       </form>
     </mat-step>
     <mat-step>
