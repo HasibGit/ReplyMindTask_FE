@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
   atLeastOneValidator,
+  dateOfBirthValidator,
   maxWordsValidator,
   passwordMatchValidator,
   passwordStrengthValidator,
@@ -22,12 +23,14 @@ export class CreateOrUpdateProfileComponent implements OnInit {
   isLoading = false;
   salutationOptions = SALUTATIONS;
   hidePassword = true;
+  maxDateForDateOrBirth: string;
 
   passwordCriteria = USER_PASSWORD_CRITERIA;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.setDobConstraint();
     this.initSignupForm();
   }
 
@@ -48,7 +51,10 @@ export class CreateOrUpdateProfileComponent implements OnInit {
           ],
         ],
         ConfirmPassword: ['', Validators.required],
-        DateOfBirth: ['', Validators.required],
+        DateOfBirth: [
+          '',
+          [Validators.required, dateOfBirthValidator.bind(this)],
+        ],
         StreetAddress: ['', Validators.required],
         City: ['', Validators.required],
         PostalCode: ['', Validators.required],
@@ -61,6 +67,11 @@ export class CreateOrUpdateProfileComponent implements OnInit {
       },
       { validator: passwordMatchValidator('Password', 'ConfirmPassword') }
     );
+  }
+
+  setDobConstraint() {
+    const today = new Date();
+    this.maxDateForDateOrBirth = today.toISOString().split('T')[0];
   }
 
   togglePasswordVisibility(): void {

@@ -71,3 +71,12 @@ export function passwordMatchValidator(
     }
   };
 }
+
+export function dateOfBirthValidator(
+  control: AbstractControl
+): { [key: string]: any } | null {
+  const selectedDate = new Date(control.value);
+  const today = new Date();
+
+  return selectedDate > today ? { futureDate: true } : null;
+}
