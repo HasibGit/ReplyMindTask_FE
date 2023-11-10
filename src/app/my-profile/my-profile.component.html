@@ -1,1 +1,26 @@
-<p>my-profile works!</p>
+<div class="container" fxLayout="row" fxLayoutAlign="center start">
+  <div class="p-24" fxFlex="50%" fxFlex.lt-lg="100%">
+    <div
+      fxLayout="row"
+      fxLayout.lt-md="column"
+      fxLayoutAlign="space-between center"
+      fxLayoutAlign.lt-md="start center"
+      fxLayoutGap.lt-md="24px"
+    >
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <img
+          style="height: 80px; width: 80px; border-radius: 50%"
+          src="../../assets/images/kayo.jpg"
+          alt=""
+        />
+        <h2>
+          {{ user.Salutation + " " + user.FirstName + " " + user.LastName }}
+        </h2>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <button mat-button color="primary">Update</button>
+        <button mat-button color="warn">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
