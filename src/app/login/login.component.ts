@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
+  hidePassword = true;
 
   constructor(private fb: FormBuilder) {}
 
@@ -27,5 +28,9 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     console.log(this.loginForm.value);
     this.isLoading = false;
+  }
+
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
 }

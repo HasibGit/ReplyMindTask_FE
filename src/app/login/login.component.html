@@ -18,8 +18,22 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Enter password</mat-label>
-      <input type="password" matInput formControlName="Password" />
-      <mat-hint>Should be at least 6 characters long.</mat-hint>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <input
+          type="{{ hidePassword ? 'password' : 'text' }}"
+          matInput
+          formControlName="Password"
+        />
+        <button
+          mat-icon-button
+          type="button"
+          (click)="togglePasswordVisibility()"
+        >
+          <mat-icon class="password-visibility-toggle-btn">{{
+            hidePassword ? "visibility" : "visibility_off"
+          }}</mat-icon>
+        </button>
+      </div>
       <mat-error *ngIf="loginForm.controls.Password.hasError('required')"
         >This field is required</mat-error
       >
