@@ -407,7 +407,7 @@
         You are ready to create your account!
       </p>
       <p class="mt-20 mb-24" *ngIf="isEdit">
-        You are ready to create your account!
+        You are ready to update your account!
       </p>
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <button mat-button matStepperPrevious>Back</button>
@@ -418,7 +418,7 @@
           (click)="!isEdit ? signup() : update()"
           [disabled]="signupForm.invalid || isLoading"
         >
-          {{ isEdit ? "Create Account" : "Update Account" }}
+          {{ !isEdit ? "Create Account" : "Update Account" }}
         </button>
       </div>
     </mat-step>

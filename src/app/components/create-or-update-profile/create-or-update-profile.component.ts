@@ -25,6 +25,7 @@ import {
 import { take } from 'rxjs';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/shared/services/helper.service';
+import { NavigationsService } from 'src/app/services/navigations.service';
 
 @Component({
   selector: 'app-create-or-update-profile',
@@ -54,7 +55,8 @@ export class CreateOrUpdateProfileComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private helperService: HelperService
+    private helperService: HelperService,
+    private navigationsService: NavigationsService
   ) {}
 
   ngOnInit(): void {
@@ -173,6 +175,7 @@ export class CreateOrUpdateProfileComponent implements OnInit {
           this.userService.saveToken(res.token);
           this.userService.saveUserId(res.userId);
           this.router.navigate(['/']);
+          this.navigationsService.setAuthenticationState(true);
           this.helperService.openSnackBar('Account created successfully');
         },
         (error) => {
