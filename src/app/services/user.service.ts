@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { User, UserLoginPayload } from '../interfaces/app.interface';
+import {
+  UpdateUserPayload,
+  User,
+  UserLoginPayload,
+} from '../interfaces/app.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -15,6 +19,15 @@ export class UserService {
   signUp(payload: User): Observable<any> {
     return this.http.post(
       `${environment.backendUrl}${API_ENDPOINTS.SIGN_UP}`,
+      payload
+    );
+  }
+
+  updateUser(payload: UpdateUserPayload): Observable<any> {
+    return this.http.put(
+      `${environment.backendUrl}${
+        API_ENDPOINTS.UPDATE_USER
+      }/${this.getUserId()}`,
       payload
     );
   }

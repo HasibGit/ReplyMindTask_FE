@@ -17,7 +17,11 @@ import {
 } from '../../shared/constants/app.constants';
 import { MatSelectChange } from '@angular/material/select';
 import { UserService } from 'src/app/services/user.service';
-import { CreateUserFormRawValue, User } from 'src/app/interfaces/app.interface';
+import {
+  CreateUserFormRawValue,
+  UpdateUserPayload,
+  User,
+} from 'src/app/interfaces/app.interface';
 import { take } from 'rxjs';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/shared/services/helper.service';
@@ -154,35 +158,82 @@ export class CreateOrUpdateProfileComponent implements OnInit {
   }
 
   signup() {
-    console.log(this.signupForm.getRawValue());
-    // this.isLoading = true;
+    this.isLoading = true;
 
-    // const userData: CreateUserFormRawValue = this.signupForm.getRawValue();
+    const userData: CreateUserFormRawValue = this.signupForm.getRawValue();
 
-    // const payload: User = this.getCreateUserPayload(userData);
+    const payload: User = this.getCreateUserPayload(userData);
 
-    // this.userService
-    //   .signUp(payload)
-    //   .pipe(take(1))
-    //   .subscribe(
-    //     (res) => {
-    //       this.isLoading = false;
-    //       this.userService.saveToken(res.token);
-    //       this.userService.saveUserId(res.userId);
-    //       this.router.navigate(['/']);
-    //       this.helperService.openSnackBar('Account created successfully');
-    //     },
-    //     (error) => {
-    //       this.isLoading = false;
-    //       if (error?.error?.code == '11000') {
-    //         this.helperService.openSnackBar(
-    //           'Account with the given email already exists!'
-    //         );
-    //       } else {
-    //         this.helperService.openSnackBar('Sorry, something went wrong');
-    //       }
-    //     }
-    //   );
+    this.userService
+      .signUp(payload)
+      .pipe(take(1))
+      .subscribe(
+        (res) => {
+          this.isLoading = false;
+          this.userService.saveToken(res.token);
+          this.userService.saveUserId(res.userId);
+          this.router.navigate(['/']);
+          this.helperService.openSnackBar('Account created successfully');
+        },
+        (error) => {
+          this.isLoading = false;
+          if (error?.error?.code == '11000') {
+            this.helperService.openSnackBar(
+              'Account with the given email already exists!'
+            );
+          } else {
+            this.helperService.openSnackBar('Sorry, something went wrong');
+          }
+        }
+      );
+  }
+
+  update() {
+    this.isLoading = true;
+
+    const userData: CreateUserFormRawValue = this.signupForm.getRawValue();
+
+    const payload: UpdateUserPayload = this.getUpdateUserPayload(userData);
+
+    this.userService
+      .updateUser(payload)
+      .pipe(take(1))
+      .subscribe(
+        (res) => {
+          this.isLoading = false;
+          this.userService.saveToken(res.token);
+          this.userService.saveUserId(res.userId);
+          this.router.navigate(['/']);
+          this.helperService.openSnackBar('Account updated successfully');
+        },
+        (error) => {
+          this.isLoading = false;
+          if (error.status === 500) {
+            this.helperService.openSnackBar('Sorry, something went wrong.');
+          } else {
+            this.helperService.openSnackBar(
+              error?.error?.message || 'Sorry, something went wrong.'
+            );
+          }
+        }
+      );
+  }
+
+  getUpdateUserPayload(data: CreateUserFormRawValue): UpdateUserPayload {
+    return {
+      Salutation: data.personalInformation.Salutation,
+      FirstName: data.personalInformation.FirstName,
+      LastName: data.personalInformation.LastName,
+      DateOfBirth: data.personalInformation.DateOfBirth,
+      StreetAddress: data.personalInformation.StreetAddress,
+      City: data.personalInformation.City,
+      PostalCode: data.personalInformation.PostalCode,
+      Country: data.personalInformation.Country,
+      WorkExperienceInYears: data.professionalInformation.WorkExperienceInYears,
+      Profession: data.professionalInformation.Profession,
+      AreasOfExpertise: data.professionalInformation.AreasOfExpertise,
+      Bio: data.professionalInformation.Bio,
+    };
   }
 
   getCreateUserPayload(data: CreateUserFormRawValue): User {

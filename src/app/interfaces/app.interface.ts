@@ -16,6 +16,21 @@ export interface User {
   Bio: string;
 }
 
+export interface UpdateUserPayload {
+  Salutation: string;
+  FirstName: string;
+  LastName: string;
+  DateOfBirth: string;
+  StreetAddress: string;
+  City: string;
+  PostalCode: string;
+  Country: string;
+  WorkExperienceInYears: string;
+  Profession: string;
+  AreasOfExpertise: string[];
+  Bio: string;
+}
+
 export interface UserLoginPayload {
   Email: string;
   Password: string;

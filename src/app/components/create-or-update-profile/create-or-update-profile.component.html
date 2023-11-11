@@ -415,10 +415,10 @@
           type="submit"
           mat-raised-button
           color="primary"
-          (click)="signup()"
+          (click)="!isEdit ? signup() : update()"
           [disabled]="signupForm.invalid || isLoading"
         >
-          Create Account
+          {{ isEdit ? "Create Account" : "Update Account" }}
         </button>
       </div>
     </mat-step>
