@@ -40,7 +40,6 @@ export class MyProfileComponent implements OnInit {
           // proably token has expired
           sessionStorage.removeItem('rm_token');
           sessionStorage.removeItem('rm_userId');
-          this.router.navigate(['/login']);
           this.navigationsService.setAuthenticationState(false);
 
           this.helperService.openSnackBar('Sorry, something went wrong');
