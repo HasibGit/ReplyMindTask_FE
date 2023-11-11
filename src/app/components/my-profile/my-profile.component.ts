@@ -40,12 +40,13 @@ export class MyProfileComponent implements OnInit {
         (error) => {
           this.isLoading = false;
 
+          if (this.userService.isLoggedIn()) {
+            this.helperService.openSnackBar('Sorry, something went wrong');
+          }
           // proably token has expired
           sessionStorage.removeItem('rm_token');
           sessionStorage.removeItem('rm_userId');
           this.navigationsService.setAuthenticationState(false);
-
-          this.helperService.openSnackBar('Sorry, something went wrong');
           this.router.navigate(['/login']);
         }
       );
