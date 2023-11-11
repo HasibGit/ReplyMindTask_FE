@@ -32,6 +32,14 @@ export class UserService {
     );
   }
 
+  deleteUser(): Observable<any> {
+    return this.http.delete(
+      `${environment.backendUrl}${
+        API_ENDPOINTS.DELETE_USER
+      }/${this.getUserId()}`
+    );
+  }
+
   login(payload: UserLoginPayload): Observable<any> {
     return this.http.post(
       `${environment.backendUrl}${API_ENDPOINTS.LOGIN}`,

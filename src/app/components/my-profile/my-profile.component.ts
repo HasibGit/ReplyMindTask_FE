@@ -61,7 +61,30 @@ export class MyProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res?.confirmed) {
-        console.log('Delete account');
+        this.isLoading = true;
+        this.userService
+          .deleteUser()
+          .pipe(take(1))
+          .subscribe(
+            () => {
+              this.isLoading = false;
+              sessionStorage.removeItem('rm_token');
+              sessionStorage.removeItem('rm_userId');
+              this.navigationsService.setAuthenticationState(false);
+
+              this.helperService.openSnackBar('Your account has been deleted');
+              this.router.navigate(['/login']);
+            },
+            () => {
+              this.isLoading = false;
+              sessionStorage.removeItem('rm_token');
+              sessionStorage.removeItem('rm_userId');
+              this.navigationsService.setAuthenticationState(false);
+
+              this.helperService.openSnackBar('Sorry, something went wrong');
+              this.router.navigate(['/login']);
+            }
+          );
       } else {
         console.log('Modal closed');
       }
