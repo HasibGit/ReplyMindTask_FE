@@ -125,6 +125,8 @@ export class CreateOrUpdateProfileComponent implements OnInit {
       }),
     });
 
+    console.log(this.signupForm);
+
     this.personalInformationForm = this.signupForm.get(
       'personalInformation'
     ) as FormGroup;

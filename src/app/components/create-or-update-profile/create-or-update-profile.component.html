@@ -1,5 +1,11 @@
 <section class="container px-16" fxLayout="row" fxLayoutAlign="center start">
-  <mat-stepper orientation="vertical" class="mt-80" [linear]="true" #stepper>
+  <mat-stepper
+    orientation="vertical"
+    class="mt-80"
+    [linear]="true"
+    #stepper
+    *ngIf="!isLoading"
+  >
     <mat-step [stepControl]="personalInformationForm">
       <form
         [formGroup]="personalInformationForm"
