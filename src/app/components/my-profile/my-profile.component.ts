@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../interfaces/app.interface';
+import { UserService } from 'src/app/services/user.service';
+import { take } from 'rxjs';
+import { HelperService } from 'src/app/shared/services/helper.service';
+import { Router } from '@angular/router';
+import { LOADER_CONFIG } from 'src/app/shared/constants/app.constants';
 
 @Component({
   selector: 'app-my-profile',
@@ -8,27 +13,31 @@ import { User } from '../../interfaces/app.interface';
 })
 export class MyProfileComponent implements OnInit {
   user: User;
+  isLoading = false;
+  loaderConfig = LOADER_CONFIG;
 
-  constructor() {}
+  constructor(
+    private userService: UserService,
+    private helperService: HelperService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.user = {
-      Salutation: 'Mr.',
-      FirstName: 'John',
-      LastName: 'Doe',
-      Email: 'john.doe@example.com',
-      Password: '1qaz<LP_',
-      ConfirmPassword: '1qaz<LP_',
-      DateOfBirth: '1990-01-01',
-      StreetAddress: '123 Main St',
-      City: 'Cityville',
-      PostalCode: '12345',
-      Country: 'United States',
-      WorkExperienceInYears: '5',
-      Profession: 'Software Engineer',
-      AreasOfExpertise: ['Frontend Development', 'Backend Development'],
-      Bio: 'Passionate software engineer with a focus on building scalable and user-friendly applications.',
-    };
+    this.isLoading = true;
+    this.userService
+      .getUserById(this.userService.getUserId())
+      .pipe(take(1))
+      .subscribe(
+        (res) => {
+          this.isLoading = false;
+          this.user = res;
+        },
+        (error) => {
+          this.isLoading = false;
+          this.helperService.openSnackBar('Sorry, something went wrong');
+          this.router.navigate(['/login']);
+        }
+      );
   }
 
   getFullName() {

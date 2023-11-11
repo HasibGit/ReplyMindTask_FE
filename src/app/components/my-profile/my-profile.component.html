@@ -1,5 +1,5 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center start">
-  <div class="p-24" fxFlex="50%" fxFlex.lt-lg="100%">
+  <div class="p-24" fxFlex="50%" fxFlex.lt-lg="100%" *ngIf="!isLoading">
     <div
       fxLayout="row"
       fxLayout.lt-md="column"
@@ -142,3 +142,5 @@
     </div>
   </div>
 </div>
+
+<ngx-loading [show]="isLoading" [config]="loaderConfig"> </ngx-loading>

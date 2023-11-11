@@ -19,6 +19,12 @@ export class UserService {
     );
   }
 
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(
+      `${environment.backendUrl}${API_ENDPOINTS.GET_USER_BY_ID}/${id}`
+    );
+  }
+
   isLoggedIn() {
     return (
       sessionStorage.getItem('rm_token') && sessionStorage.getItem('rm_userId')
