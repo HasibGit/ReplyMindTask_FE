@@ -39,3 +39,12 @@ export const YEARS_OF_EXPERIENCE_OPTIONS = [
   '1 - 5 years',
   '5 years+',
 ];
+
+export const LOADER_CONFIG = {
+  backdropBorderRadius: '3px',
+  fullScreenBackdrop: true,
+  backdropBackgroundColour: 'rgba(0,0,0,0.3)',
+  primaryColour: '#673ab7',
+  secondaryColour: '#8d63c9',
+  tertiaryColour: '#b492d8',
+};

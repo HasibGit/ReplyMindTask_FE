@@ -9,6 +9,7 @@ import {
 } from '../../shared/validators/app.validators';
 import {
   AREAS_OF_INTEREST_RELEVANT_TO_PROFESSION,
+  LOADER_CONFIG,
   SALUTATIONS,
   USER_PASSWORD_CRITERIA,
   USER_PROFESSIONS,
@@ -37,6 +38,7 @@ export class CreateOrUpdateProfileComponent implements OnInit {
   experienceInYearsOptions = YEARS_OF_EXPERIENCE_OPTIONS;
   professionOptions = USER_PROFESSIONS;
   areasOfInterestOptions: string[];
+  loaderConfig = LOADER_CONFIG;
 
   passwordCriteria = USER_PASSWORD_CRITERIA;
 

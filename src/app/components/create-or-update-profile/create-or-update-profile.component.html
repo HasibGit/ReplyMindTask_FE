@@ -405,7 +405,7 @@
           mat-raised-button
           color="primary"
           (click)="signup()"
-          [disabled]="signupForm.invalid"
+          [disabled]="signupForm.invalid || isLoading"
         >
           Create Account
         </button>
@@ -413,3 +413,5 @@
     </mat-step>
   </mat-stepper>
 </section>
+
+<ngx-loading [show]="isLoading" [config]="loaderConfig"> </ngx-loading>
