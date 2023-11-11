@@ -86,14 +86,16 @@ export class CreateOrUpdateProfileComponent implements OnInit {
           ],
           Password: [
             '',
-            [
-              Validators.required,
-              Validators.minLength(6),
-              Validators.maxLength(20),
-              passwordStrengthValidator(),
-            ],
+            !this.isEdit
+              ? [
+                  Validators.required,
+                  Validators.minLength(6),
+                  Validators.maxLength(20),
+                  passwordStrengthValidator(),
+                ]
+              : [],
           ],
-          ConfirmPassword: ['', Validators.required],
+          ConfirmPassword: ['', !this.isEdit ? [Validators.required] : []],
           DateOfBirth: [
             this.user.DateOfBirth || '',
             [Validators.required, dateOfBirthValidator.bind(this)],
