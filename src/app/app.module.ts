@@ -13,7 +13,7 @@ import { SidenavListComponent } from './components/navigations/sidenav-list/side
 import { TooltipListPipe } from './shared/pipes/tooltip-list.pipe';
 import { CommaSeparatedPipe } from './shared/pipes/comma-seperated.pipe';
 import { HavatarModule } from 'havatar';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
@@ -33,6 +33,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     BrowserAnimationsModule,
     SharedModule,
     HavatarModule,
+    HttpClientModule,
   ],
   providers: [
     {

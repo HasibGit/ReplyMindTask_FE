@@ -15,6 +15,10 @@ import {
   YEARS_OF_EXPERIENCE_OPTIONS,
 } from '../../shared/constants/app.constants';
 import { MatSelectChange } from '@angular/material/select';
+import { UserService } from 'src/app/services/user.service';
+import { CreateUserFormRawValue, User } from 'src/app/interfaces/app.interface';
+import { take } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-or-update-profile',
@@ -35,7 +39,11 @@ export class CreateOrUpdateProfileComponent implements OnInit {
 
   passwordCriteria = USER_PASSWORD_CRITERIA;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.setDobConstraint();
@@ -103,6 +111,45 @@ export class CreateOrUpdateProfileComponent implements OnInit {
   }
 
   signup() {
+    this.isLoading = true;
+
+    const userData: CreateUserFormRawValue = this.signupForm.getRawValue();
+
+    const payload: User = this.getCreateUserPayload(userData);
+
+    this.userService
+      .signUp(payload)
+      .pipe(take(1))
+      .subscribe(
+        (res) => {
+          this.isLoading = false;
+          this.userService.saveToken(res.token);
+          this.userService.saveUserId(res.userId);
+          this.router.navigate(['/']);
+        },
+        (error) => console.error(error)
+      );
+
     console.log(this.signupForm.value);
+  }
+
+  getCreateUserPayload(data: CreateUserFormRawValue): User {
+    return {
+      Salutation: data.personalInformation.Salutation,
+      FirstName: data.personalInformation.FirstName,
+      LastName: data.personalInformation.LastName,
+      Email: data.personalInformation.Email,
+      Password: data.personalInformation.Password,
+      ConfirmPassword: data.personalInformation.ConfirmPassword,
+      DateOfBirth: data.personalInformation.DateOfBirth,
+      StreetAddress: data.personalInformation.StreetAddress,
+      City: data.personalInformation.City,
+      PostalCode: data.personalInformation.PostalCode,
+      Country: data.personalInformation.Country,
+      WorkExperienceInYears: data.professionalInformation.WorkExperienceInYears,
+      Profession: data.professionalInformation.Profession,
+      AreasOfExpertise: data.professionalInformation.AreasOfExpertise,
+      Bio: data.professionalInformation.Bio,
+    };
   }
 }

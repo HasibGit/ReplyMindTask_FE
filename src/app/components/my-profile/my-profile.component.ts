@@ -17,6 +17,8 @@ export class MyProfileComponent implements OnInit {
       FirstName: 'John',
       LastName: 'Doe',
       Email: 'john.doe@example.com',
+      Password: '1qaz<LP_',
+      ConfirmPassword: '1qaz<LP_',
       DateOfBirth: '1990-01-01',
       StreetAddress: '123 Main St',
       City: 'Cityville',

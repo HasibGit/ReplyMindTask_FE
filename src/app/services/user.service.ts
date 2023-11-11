@@ -1,11 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../interfaces/app.interface';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { API_ENDPOINTS } from '../shared/constants/api-endpoints';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private http: HttpClient) {}
+
+  signUp(payload: User): Observable<any> {
+    return this.http.post(
+      `${environment.backendUrl}${API_ENDPOINTS.SIGN_UP}`,
+      payload
+    );
+  }
 
   isLoggedIn() {
     return (
