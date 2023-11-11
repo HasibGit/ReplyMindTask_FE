@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor() {}
+  constructor(private router: Router) {}
 
   isLoggedIn() {
     return (
@@ -26,5 +27,11 @@ export class UserService {
 
   getUserId() {
     return sessionStorage.getItem('rm_userId') || '';
+  }
+
+  logoutUser() {
+    sessionStorage.removeItem('rm_token');
+    sessionStorage.removeItem('rm_userId');
+    this.router.navigate(['/login']);
   }
 }

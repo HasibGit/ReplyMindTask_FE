@@ -13,6 +13,8 @@ import { SidenavListComponent } from './components/navigations/sidenav-list/side
 import { TooltipListPipe } from './shared/pipes/tooltip-list.pipe';
 import { CommaSeparatedPipe } from './shared/pipes/comma-seperated.pipe';
 import { HavatarModule } from 'havatar';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,13 @@ import { HavatarModule } from 'havatar';
     SharedModule,
     HavatarModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
