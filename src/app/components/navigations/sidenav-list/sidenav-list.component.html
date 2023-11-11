@@ -4,6 +4,7 @@
     routerLink="login"
     routerLinkActive="active-nav"
     (click)="onClickSidenavLink()"
+    *ngIf="!isLoggedIn"
   >
     <mat-icon class="sidenav-link-icon">login</mat-icon>
     <span class="sidenav-link-label">Login</span>
@@ -14,8 +15,18 @@
     routerLink="create-or-update"
     routerLinkActive="active-nav"
     (click)="onClickSidenavLink()"
+    *ngIf="!isLoggedIn"
   >
     <mat-icon class="sidenav-link-icon">person_add</mat-icon>
     <span class="sidenav-link-label">Create Account</span>
+  </a>
+  <a
+    *ngIf="isLoggedIn"
+    mat-list-item
+    routerLinkActive="active-nav"
+    (click)="logout()"
+  >
+    <mat-icon class="sidenav-link-icon">logout</mat-icon
+    ><span class="sidenav-link-label">Logout</span>
   </a>
 </mat-nav-list>

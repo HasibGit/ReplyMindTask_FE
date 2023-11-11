@@ -25,10 +25,11 @@ export class UserService {
     );
   }
 
-  isLoggedIn() {
-    return (
-      sessionStorage.getItem('rm_token') && sessionStorage.getItem('rm_userId')
-    );
+  isLoggedIn(): boolean {
+    return sessionStorage.getItem('rm_token') &&
+      sessionStorage.getItem('rm_userId')
+      ? true
+      : false;
   }
 
   saveToken(token: string) {

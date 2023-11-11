@@ -34,6 +34,7 @@ export class MyProfileComponent implements OnInit {
         },
         (error) => {
           this.isLoading = false;
+          this.userService.logoutUser();
           this.helperService.openSnackBar('Sorry, something went wrong');
           this.router.navigate(['/login']);
         }

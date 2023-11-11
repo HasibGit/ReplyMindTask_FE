@@ -23,11 +23,16 @@
     fxLayoutGap="5px"
     fxHide.xs
   >
-    <li><a routerLink="login" mat-button color="primary">Login</a></li>
-    <li>
+    <li *ngIf="!isLoggedIn">
+      <a routerLink="login" mat-button color="primary">Login</a>
+    </li>
+    <li *ngIf="!isLoggedIn">
       <a routerLink="create-or-update" mat-button color="primary"
         >Create Account</a
       >
+    </li>
+    <li *ngIf="isLoggedIn">
+      <a (click)="logout()" mat-button color="primary">Logout</a>
     </li>
   </ul>
 </mat-toolbar>

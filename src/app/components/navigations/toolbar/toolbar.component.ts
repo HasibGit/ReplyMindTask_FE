@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,11 +10,19 @@ export class ToolbarComponent implements OnInit {
   @Output('toggleSideNav') toggleSidenav: EventEmitter<void> =
     new EventEmitter();
 
-  constructor() {}
+  isLoggedIn = false;
 
-  ngOnInit(): void {}
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.isLoggedIn = this.userService.isLoggedIn();
+  }
 
   onToggleSidenav() {
     this.toggleSidenav.emit();
+  }
+
+  logout() {
+    this.userService.logoutUser();
   }
 }
