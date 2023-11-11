@@ -6,6 +6,8 @@ import { HelperService } from 'src/app/shared/services/helper.service';
 import { Router } from '@angular/router';
 import { LOADER_CONFIG } from 'src/app/shared/constants/app.constants';
 import { NavigationsService } from 'src/app/services/navigations.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DeleteAccountModalComponent } from 'src/app/modals/delete-account-modal/delete-account-modal.component';
 
 @Component({
   selector: 'app-my-profile',
@@ -21,7 +23,8 @@ export class MyProfileComponent implements OnInit {
     private userService: UserService,
     private helperService: HelperService,
     private navigationsService: NavigationsService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +49,29 @@ export class MyProfileComponent implements OnInit {
           this.router.navigate(['/login']);
         }
       );
+  }
+
+  deleteAccount() {
+    const dialogConfig = new MatDialogConfig();
+    this.getDialogConfig(dialogConfig);
+    const dialogRef = this.dialog.open(
+      DeleteAccountModalComponent,
+      dialogConfig
+    );
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res?.confirmed) {
+        console.log('Delete account');
+      } else {
+        console.log('Modal closed');
+      }
+    });
+  }
+
+  getDialogConfig(config: MatDialogConfig) {
+    config.autoFocus = true;
+    config.disableClose = true;
+    config.width = '400px';
   }
 
   getFullName() {

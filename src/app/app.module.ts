@@ -15,6 +15,7 @@ import { CommaSeparatedPipe } from './shared/pipes/comma-seperated.pipe';
 import { HavatarModule } from 'havatar';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { DeleteAccountModalComponent } from './modals/delete-account-modal/delete-account-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     SidenavListComponent,
     TooltipListPipe,
     CommaSeparatedPipe,
+    DeleteAccountModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
       multi: true,
     },
   ],
+  entryComponents: [DeleteAccountModalComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
