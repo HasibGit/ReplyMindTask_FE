@@ -32,6 +32,9 @@
       >
     </li>
     <li *ngIf="isLoggedIn">
+      <a routerLink="" mat-button color="primary">My Profile</a>
+    </li>
+    <li *ngIf="isLoggedIn">
       <a (click)="logout()" mat-button color="primary">Logout</a>
     </li>
   </ul>

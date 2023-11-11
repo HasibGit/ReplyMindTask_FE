@@ -48,6 +48,7 @@ export class SidenavListComponent implements OnInit, OnDestroy {
         sessionStorage.removeItem('rm_userId');
         this.router.navigate(['/login']);
         this.navigationsService.setAuthenticationState(false);
+        this.onClickSidenavLink();
       });
   }
 
