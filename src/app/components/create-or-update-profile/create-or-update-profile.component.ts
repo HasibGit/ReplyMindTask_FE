@@ -19,6 +19,7 @@ import { UserService } from 'src/app/services/user.service';
 import { CreateUserFormRawValue, User } from 'src/app/interfaces/app.interface';
 import { take } from 'rxjs';
 import { Router } from '@angular/router';
+import { HelperService } from 'src/app/shared/services/helper.service';
 
 @Component({
   selector: 'app-create-or-update-profile',
@@ -42,7 +43,8 @@ export class CreateOrUpdateProfileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private helperService: HelperService
   ) {}
 
   ngOnInit(): void {
@@ -126,8 +128,18 @@ export class CreateOrUpdateProfileComponent implements OnInit {
           this.userService.saveToken(res.token);
           this.userService.saveUserId(res.userId);
           this.router.navigate(['/']);
+          this.helperService.openSnackBar('Account created successfully');
         },
-        (error) => console.error(error)
+        (error) => {
+          this.isLoading = false;
+          if (error?.error?.code == '11000') {
+            this.helperService.openSnackBar(
+              'Account with the given email already exists!'
+            );
+          } else {
+            this.helperService.openSnackBar('Sorry, something went wrong');
+          }
+        }
       );
 
     console.log(this.signupForm.value);
