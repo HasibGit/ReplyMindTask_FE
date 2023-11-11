@@ -1,3 +1,5 @@
+@import "../../color-variables.scss";
+
 mat-form-field {
   width: 300px;
 }
@@ -7,5 +9,6 @@ mat-form-field {
     width: 20px;
     height: 20px;
     line-height: 20px;
+    color: $mat-icon-color;
   }
 }

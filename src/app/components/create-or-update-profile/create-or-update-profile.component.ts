@@ -6,14 +6,14 @@ import {
   maxWordsValidator,
   passwordMatchValidator,
   passwordStrengthValidator,
-} from '../shared/validators/app.validators';
+} from '../../shared/validators/app.validators';
 import {
   AREAS_OF_INTEREST_RELEVANT_TO_PROFESSION,
   SALUTATIONS,
   USER_PASSWORD_CRITERIA,
   USER_PROFESSIONS,
   YEARS_OF_EXPERIENCE_OPTIONS,
-} from '../shared/constants/app.constants';
+} from '../../shared/constants/app.constants';
 import { MatSelectChange } from '@angular/material/select';
 
 @Component({
