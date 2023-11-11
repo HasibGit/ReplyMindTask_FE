@@ -69,6 +69,10 @@ export class CreateOrUpdateProfileComponent implements OnInit {
           this.user = res;
           this.isEdit = true;
           this.initForms();
+          this.areasOfInterestOptions =
+            AREAS_OF_INTEREST_RELEVANT_TO_PROFESSION[
+              this.professionalInformationForm.controls['Profession'].value
+            ];
         });
     }
   }
@@ -125,8 +129,6 @@ export class CreateOrUpdateProfileComponent implements OnInit {
       }),
     });
 
-    console.log(this.signupForm);
-
     this.personalInformationForm = this.signupForm.get(
       'personalInformation'
     ) as FormGroup;
@@ -180,8 +182,6 @@ export class CreateOrUpdateProfileComponent implements OnInit {
           }
         }
       );
-
-    console.log(this.signupForm.value);
   }
 
   getCreateUserPayload(data: CreateUserFormRawValue): User {
