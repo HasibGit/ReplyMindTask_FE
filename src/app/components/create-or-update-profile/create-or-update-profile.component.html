@@ -403,7 +403,12 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
-      <p class="mt-20 mb-24">You are ready to create your account!</p>
+      <p class="mt-20 mb-24" *ngIf="!isEdit">
+        You are ready to create your account!
+      </p>
+      <p class="mt-20 mb-24" *ngIf="isEdit">
+        You are ready to create your account!
+      </p>
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <button mat-button matStepperPrevious>Back</button>
         <button

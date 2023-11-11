@@ -85,7 +85,7 @@ export class CreateOrUpdateProfileComponent implements OnInit {
           FirstName: [this.user.FirstName || '', Validators.required],
           LastName: [this.user.LastName || '', Validators.required],
           Email: [
-            this.user.Email || '',
+            { value: this.user.Email || '', disabled: this.isEdit },
             [Validators.required, Validators.email],
           ],
           Password: [
@@ -154,34 +154,35 @@ export class CreateOrUpdateProfileComponent implements OnInit {
   }
 
   signup() {
-    this.isLoading = true;
+    console.log(this.signupForm.getRawValue());
+    // this.isLoading = true;
 
-    const userData: CreateUserFormRawValue = this.signupForm.getRawValue();
+    // const userData: CreateUserFormRawValue = this.signupForm.getRawValue();
 
-    const payload: User = this.getCreateUserPayload(userData);
+    // const payload: User = this.getCreateUserPayload(userData);
 
-    this.userService
-      .signUp(payload)
-      .pipe(take(1))
-      .subscribe(
-        (res) => {
-          this.isLoading = false;
-          this.userService.saveToken(res.token);
-          this.userService.saveUserId(res.userId);
-          this.router.navigate(['/']);
-          this.helperService.openSnackBar('Account created successfully');
-        },
-        (error) => {
-          this.isLoading = false;
-          if (error?.error?.code == '11000') {
-            this.helperService.openSnackBar(
-              'Account with the given email already exists!'
-            );
-          } else {
-            this.helperService.openSnackBar('Sorry, something went wrong');
-          }
-        }
-      );
+    // this.userService
+    //   .signUp(payload)
+    //   .pipe(take(1))
+    //   .subscribe(
+    //     (res) => {
+    //       this.isLoading = false;
+    //       this.userService.saveToken(res.token);
+    //       this.userService.saveUserId(res.userId);
+    //       this.router.navigate(['/']);
+    //       this.helperService.openSnackBar('Account created successfully');
+    //     },
+    //     (error) => {
+    //       this.isLoading = false;
+    //       if (error?.error?.code == '11000') {
+    //         this.helperService.openSnackBar(
+    //           'Account with the given email already exists!'
+    //         );
+    //       } else {
+    //         this.helperService.openSnackBar('Sorry, something went wrong');
+    //       }
+    //     }
+    //   );
   }
 
   getCreateUserPayload(data: CreateUserFormRawValue): User {
