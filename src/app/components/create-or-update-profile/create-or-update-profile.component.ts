@@ -42,6 +42,10 @@ export class CreateOrUpdateProfileComponent implements OnInit {
 
   passwordCriteria = USER_PASSWORD_CRITERIA;
 
+  userId: string;
+  user: User;
+  isEdit = false;
+
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -50,18 +54,36 @@ export class CreateOrUpdateProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.setDobConstraint();
-    this.initForms();
+
+    this.userId = this.userService.getUserId();
+
+    if (!this.userId) {
+      this.initForms();
+    } else {
+      this.userService
+        .getUserById(this.userId)
+        .pipe(take(1))
+        .subscribe((res) => {
+          this.user = res;
+          this.isEdit = true;
+          this.initForms();
+        });
+    }
   }
 
   initForms() {
     this.signupForm = this.fb.group({
       personalInformation: this.fb.group(
         {
-          Salutation: ['', Validators.required],
-          FirstName: ['', Validators.required],
-          LastName: ['', Validators.required],
-          Email: ['', [Validators.required, Validators.email]],
+          Salutation: [this.user.Salutation || '', Validators.required],
+          FirstName: [this.user.FirstName || '', Validators.required],
+          LastName: [this.user.LastName || '', Validators.required],
+          Email: [
+            this.user.Email || '',
+            [Validators.required, Validators.email],
+          ],
           Password: [
             '',
             [
@@ -73,22 +95,31 @@ export class CreateOrUpdateProfileComponent implements OnInit {
           ],
           ConfirmPassword: ['', Validators.required],
           DateOfBirth: [
-            '',
+            this.user.DateOfBirth || '',
             [Validators.required, dateOfBirthValidator.bind(this)],
           ],
-          StreetAddress: ['', Validators.required],
-          City: ['', Validators.required],
-          PostalCode: ['', Validators.required],
-          Country: ['', Validators.required],
+          StreetAddress: [this.user.StreetAddress || '', Validators.required],
+          City: [this.user.City || '', Validators.required],
+          PostalCode: [this.user.PostalCode || '', Validators.required],
+          Country: [this.user.Country || '', Validators.required],
         },
         { validator: passwordMatchValidator('Password', 'ConfirmPassword') }
       ),
 
       professionalInformation: this.fb.group({
-        WorkExperienceInYears: ['', Validators.required],
-        Profession: ['', Validators.required],
-        AreasOfExpertise: [[], [Validators.required]],
-        Bio: ['', [Validators.required, maxWordsValidator(50)]],
+        WorkExperienceInYears: [
+          this.user.WorkExperienceInYears || '',
+          Validators.required,
+        ],
+        Profession: [this.user.Profession || '', Validators.required],
+        AreasOfExpertise: [
+          this.user.AreasOfExpertise || [],
+          [Validators.required],
+        ],
+        Bio: [
+          this.user.Bio || '',
+          [Validators.required, maxWordsValidator(50)],
+        ],
       }),
     });
 
@@ -98,6 +129,8 @@ export class CreateOrUpdateProfileComponent implements OnInit {
     this.professionalInformationForm = this.signupForm.get(
       'professionalInformation'
     ) as FormGroup;
+
+    this.isLoading = false;
   }
 
   setDobConstraint() {

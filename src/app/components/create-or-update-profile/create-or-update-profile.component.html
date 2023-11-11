@@ -89,7 +89,7 @@
           >
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field [fxHide]="isEdit">
           <mat-label>Password</mat-label>
           <div fxLayout="row" fxLayoutAlign="space-between center">
             <input
@@ -142,7 +142,7 @@
           >
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field [fxHide]="isEdit">
           <mat-label>Confirm Password</mat-label>
           <input type="password" matInput formControlName="ConfirmPassword" />
           <mat-error
