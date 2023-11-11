@@ -85,11 +85,11 @@ export class CreateOrUpdateProfileComponent implements OnInit {
     this.signupForm = this.fb.group({
       personalInformation: this.fb.group(
         {
-          Salutation: [this.user.Salutation || '', Validators.required],
-          FirstName: [this.user.FirstName || '', Validators.required],
-          LastName: [this.user.LastName || '', Validators.required],
+          Salutation: [this.user?.Salutation || '', Validators.required],
+          FirstName: [this.user?.FirstName || '', Validators.required],
+          LastName: [this.user?.LastName || '', Validators.required],
           Email: [
-            { value: this.user.Email || '', disabled: this.isEdit },
+            { value: this.user?.Email || '', disabled: this.isEdit },
             [Validators.required, Validators.email],
           ],
           Password: [
@@ -105,29 +105,29 @@ export class CreateOrUpdateProfileComponent implements OnInit {
           ],
           ConfirmPassword: ['', !this.isEdit ? [Validators.required] : []],
           DateOfBirth: [
-            this.user.DateOfBirth || '',
+            this.user?.DateOfBirth || '',
             [Validators.required, dateOfBirthValidator.bind(this)],
           ],
-          StreetAddress: [this.user.StreetAddress || '', Validators.required],
-          City: [this.user.City || '', Validators.required],
-          PostalCode: [this.user.PostalCode || '', Validators.required],
-          Country: [this.user.Country || '', Validators.required],
+          StreetAddress: [this.user?.StreetAddress || '', Validators.required],
+          City: [this.user?.City || '', Validators.required],
+          PostalCode: [this.user?.PostalCode || '', Validators.required],
+          Country: [this.user?.Country || '', Validators.required],
         },
         { validator: passwordMatchValidator('Password', 'ConfirmPassword') }
       ),
 
       professionalInformation: this.fb.group({
         WorkExperienceInYears: [
-          this.user.WorkExperienceInYears || '',
+          this.user?.WorkExperienceInYears || '',
           Validators.required,
         ],
-        Profession: [this.user.Profession || '', Validators.required],
+        Profession: [this.user?.Profession || '', Validators.required],
         AreasOfExpertise: [
-          this.user.AreasOfExpertise || [],
+          this.user?.AreasOfExpertise || [],
           [Validators.required],
         ],
         Bio: [
-          this.user.Bio || '',
+          this.user?.Bio || '',
           [Validators.required, maxWordsValidator(50)],
         ],
       }),
