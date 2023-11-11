@@ -16,6 +16,11 @@ export interface User {
   Bio: string;
 }
 
+export interface UserLoginPayload {
+  Email: string;
+  Password: string;
+}
+
 export interface CreateUserFormRawValue {
   personalInformation: PersonalInformation;
   professionalInformation: ProfessionalInformation;

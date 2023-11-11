@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { take } from 'rxjs';
+import { NavigationsService } from 'src/app/services/navigations.service';
+import { UserService } from 'src/app/services/user.service';
+import { HelperService } from 'src/app/shared/services/helper.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +16,13 @@ export class LoginComponent implements OnInit {
   isLoading = false;
   hidePassword = true;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router,
+    private helperService: HelperService,
+    private navigationsService: NavigationsService
+  ) {}
 
   ngOnInit(): void {
     this.initLoginForm();
@@ -26,8 +37,29 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.isLoading = true;
-    console.log(this.loginForm.value);
-    this.isLoading = false;
+    const payload = this.loginForm.getRawValue();
+    this.userService
+      .login(payload)
+      .pipe(take(1))
+      .subscribe(
+        (res) => {
+          this.isLoading = false;
+          this.userService.saveToken(res.token);
+          this.userService.saveUserId(res.userId);
+          this.router.navigate(['/']);
+          this.navigationsService.setAuthenticationState(true);
+        },
+        (error) => {
+          this.isLoading = false;
+          if (error.status === 500) {
+            this.helperService.openSnackBar('Sorry, something went wrong.');
+          } else {
+            this.helperService.openSnackBar(
+              error?.error?.message || 'Sorry, something went wrong.'
+            );
+          }
+        }
+      );
   }
 
   togglePasswordVisibility() {

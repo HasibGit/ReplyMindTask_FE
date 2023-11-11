@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../interfaces/app.interface';
+import { User, UserLoginPayload } from '../interfaces/app.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -15,6 +15,13 @@ export class UserService {
   signUp(payload: User): Observable<any> {
     return this.http.post(
       `${environment.backendUrl}${API_ENDPOINTS.SIGN_UP}`,
+      payload
+    );
+  }
+
+  login(payload: UserLoginPayload): Observable<any> {
+    return this.http.post(
+      `${environment.backendUrl}${API_ENDPOINTS.LOGIN}`,
       payload
     );
   }
@@ -48,9 +55,10 @@ export class UserService {
     return sessionStorage.getItem('rm_userId') || '';
   }
 
-  logoutUser() {
-    sessionStorage.removeItem('rm_token');
-    sessionStorage.removeItem('rm_userId');
-    this.router.navigate(['/login']);
+  logoutUser(): Observable<any> {
+    return this.http.post(
+      `${environment.backendUrl}${API_ENDPOINTS.LOGOUT}`,
+      null
+    );
   }
 }

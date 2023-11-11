@@ -46,7 +46,7 @@
       mat-raised-button
       color="primary"
       (click)="login()"
-      [disabled]="loginForm.invalid"
+      [disabled]="loginForm.invalid || isLoading"
     >
       Submit
     </button>

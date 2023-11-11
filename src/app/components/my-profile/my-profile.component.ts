@@ -5,6 +5,7 @@ import { take } from 'rxjs';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { Router } from '@angular/router';
 import { LOADER_CONFIG } from 'src/app/shared/constants/app.constants';
+import { NavigationsService } from 'src/app/services/navigations.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -19,6 +20,7 @@ export class MyProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private helperService: HelperService,
+    private navigationsService: NavigationsService,
     private router: Router
   ) {}
 
@@ -34,7 +36,13 @@ export class MyProfileComponent implements OnInit {
         },
         (error) => {
           this.isLoading = false;
-          this.userService.logoutUser();
+
+          // proably token has expired
+          sessionStorage.removeItem('rm_token');
+          sessionStorage.removeItem('rm_userId');
+          this.router.navigate(['/login']);
+          this.navigationsService.setAuthenticationState(false);
+
           this.helperService.openSnackBar('Sorry, something went wrong');
           this.router.navigate(['/login']);
         }
